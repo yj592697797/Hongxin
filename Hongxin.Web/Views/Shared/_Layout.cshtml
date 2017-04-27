@@ -1,0 +1,18 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hongxin</title>
+    <script src="../Scripts/jquery-2.0.3.min.js"></script>
+    <link href="../Content/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="navbox">
+        @RenderPage("~/Views/Shared/_Menu.cshtml")
+    </div>
+    <div class="partial-content">
+        @RenderBody();
+    </div>
+</body>
+</html>
