@@ -173,6 +173,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="db\JavaScript1.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\bg.jpg" />
