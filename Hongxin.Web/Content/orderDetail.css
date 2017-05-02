@@ -1,0 +1,9 @@
+﻿.table-detail tbody {
+    color: white;
+}
+.detail-unfinished {
+    background-color: #727272;
+}
+.detail-finished {
+    background-color: #00B38C;
+}

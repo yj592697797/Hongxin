@@ -6,23 +6,15 @@ using System.Web.Mvc;
 
 namespace Hongxin.Web.Controllers
 {
-    public class OrderController : Controller
+    public class OrderDetailController : Controller
     {
         //
-        // GET: /Order/
+        // GET: /OrderDetail/
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Add() 
-        {
-            return View();
-        }
-        public ActionResult AddPost()
-        {
-            return View();
-        }
     }
 }

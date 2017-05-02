@@ -2,4 +2,97 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/order.css" rel="stylesheet" />
+<script>
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.styleUI = 'Bootstrap';
+</script>
+<div class="order-manager">
+    <header>
+        <h1>采购单管理</h1>
+    </header>
+    <div class="order-tools">
+        <div class="order-tool"><a href="@Url.Action("Add", "Order")"><i class="fa fa-plus-square"></i>添加采购单</a></div>
+    </div>
+    <div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+</div>
 
+
+<script>
+    var mydata = [
+        { Id: '1', OrderNo: 'MX-001', Supplier: '吕布', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '2', OrderNo: 'MX-002', Supplier: '赵云', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '3', OrderNo: 'MX-003', Supplier: '关羽', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '4', OrderNo: 'MX-004', Supplier: '张飞', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '5', OrderNo: 'MX-005', Supplier: '黄忠', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '6', OrderNo: 'MX-006', Supplier: '夏侯渊', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '7', OrderNo: 'MX-007', Supplier: '姜维', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '8', OrderNo: 'MX-008', Supplier: '张辽', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '9', OrderNo: 'MX-009', Supplier: '魏延', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '10', OrderNo: 'MX-010', Supplier: '马超', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '11', OrderNo: 'MX-011', Supplier: '马岱', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+        { Id: '12', OrderNo: 'MX-012', Supplier: '于禁', Phone: '13687456546', Tel: '0726-5654231', Fax: '8564214', OrderData: '2017-04-14', DeliveryDate: '2017-04-28', CreateTime: '2017-04-14' },
+    ];
+
+    $(document).ready(function () {
+        $('#jqGrid').jqGrid({
+            data: mydata,
+            datatype: 'local',
+            colModel: [
+                    { name: 'Id', label: '序号', index: 'Id', hidden: true, key: true, width: 60 },
+                    { name: 'OrderNo', label: '采购单编号', index: 'OrderNo', width: 90},
+                    { name: 'Supplier', label: '供应商', index: 'Supplier', width: 100 },
+                    { name: 'Phone', label: '联系电话', index: 'Phone', width: 80 },
+                    { name: 'Tel', label: '电话', index: 'Tel', width: 80},
+                    { name: 'Fax', label: '传真', index: 'Fax', width: 80 },
+                    { name: 'OrderData', label: '下单日期', index: 'OrderData', width: 80},
+                    { name: 'DeliveryDate', label: '交货日期', index: 'DeliveryDate', width: 80},
+                    { name: 'CreateTime', label: '创建时间', index: 'CreateTime', width: 100 },
+                    {
+                        name: '', label: '操作', index: 'Operate', width: 100,
+                        formatter: function (cellvalue, options, rowObject) {
+                            var modHtml = '<a href="javascript: void(0);" class="modify" title="修改">修改</a>';
+                            var delHtml = '<a href="javascript: void(0);" class="delete" title="删除">删除</a>';
+                            var detHtml = '<a href="javascript: void(0);" class="detail" title="详情">详情</a>';
+                            var cellHtml = '<div class="order-operate">' + modHtml + delHtml + detHtml + '</div>';
+                            return cellHtml;
+                        }
+                    }
+            ],
+            loadonce: true,
+            width: 1190,
+            height: 600,
+            rowNum: 20,
+            subGrid: true, // set the subGrid property to true to show expand buttons for each row
+            subGridRowExpanded: showChildGrid, // javascript function that will take care of showing the child grid
+            pager: '#jqGridPager'
+        });
+    });
+
+    // the event handler on expanding parent row receives two parameters
+    // the ID of the grid tow  and the primary key of the row
+    function showChildGrid(parentRowID, parentRowKey) {
+        //var html = "hello" + parentRowKey;
+        //$("#" + parentRowID).append(html);
+
+        $.ajax({
+            url: '@Url.Action("Index", "OrderDetail")',
+            type: 'GET', //GET
+            async: true,    //或false,是否异步
+            data: {},
+            dataType: 'html',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                $("#" + parentRowID).append(data);
+            },
+            error: function (xhr, textStatus) {
+                console.log('错误')
+                console.log(xhr)
+                console.log(textStatus)
+            }
+        })
+    }
+
+</script>

@@ -1,0 +1,50 @@
+﻿
+.order-manager header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.order-tools {
+    margin-bottom: 10px;
+}
+.order-tools .order-tool {
+    font-size: 20px;
+}
+    .order-tools .order-tool a {
+        text-decoration: none;
+    }
+.order-operate a {
+    float: left;
+    margin-left: 5px;
+    color: white;
+    display: block;
+    padding: 0 2px;
+    border-radius: 2px;
+    text-decoration: none;
+}
+    .order-operate a[class='modify'] {
+        background-color: #003CFF;
+    }
+    .order-operate a[class='delete'] {
+        background-color: #FF0000;
+    }
+    .order-operate a[class='detail'] {
+        background-color: #00B38c;
+    }
+.order-add {
+    width: 960px;
+    margin: auto;
+}
+.form-group {
+    float: left;
+    width: 500px;
+}
+.form-group .control-label {
+    float: left;
+    width: 100px;
+    margin: 0 5px;
+}
+.form-group .control-value {
+    float: left;
+    width: 360px;
+}
+
