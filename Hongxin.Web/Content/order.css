@@ -58,4 +58,13 @@
     float: left;
     width: 830px;
 }
+#order-detail-table {
+    width: 880px;
+    margin: auto;
+}
+    #order-detail-table td input {
+        width: 100%;
+        border: 0;
+        outline: none;
+    }
 

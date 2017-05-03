@@ -60,6 +60,43 @@
             </div>
         </div>
         <div class="form-group form-group-fill">
+            <header>
+                添加子项
+            </header>
+            <table id="order-detail-table" class="table table-detail table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th width="39px">序号</th>
+                        <th width="200px">品名规格</th>
+                        <th width="60px">单位</th>
+                        <th width="100px">数量</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="text" value="强化清玻380*206*5" /></td>
+                        <td><input type="text" value="PCS" /></td>
+                        <td><input type="text" value="700" /></td>
+                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用" /></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><input type="text" value="强化清玻386*118*5" /></td>
+                        <td><input type="text" value="PCS" /></td>
+                        <td><input type="text" value="600" /></td>
+                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/W44CFD用" /></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;"><i class="fa fa-plus-circle"></i></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="form-group form-group-fill">
             <label for="" class="control-label">详细内容</label>
             <div class="control-value">
                 <textarea name="text" class="summernote" id="contents" title="Contents"></textarea>
@@ -80,7 +117,17 @@
                 alert($('.summernote').summernote('code'));
                 alert($('.summernote').val());
             });
+
+            function bindEvents() {
+                $('#add-detail').on('click', function () { addDetail();});
+            }
         });
+
+        function addDetail() {
+            var $tbody = $('#order-detail-table tbody');
+            var sortIndex = $table.find('tr').length + 1;
+            var trHtml = '';
+        }
     </script>
 </div>
 
