@@ -260,6 +260,9 @@
   <ItemGroup>
     <Content Include="Views\Order\Add.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resource\HW-172采购单.xls" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
