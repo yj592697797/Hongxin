@@ -51,4 +51,11 @@
     float: left;
     width: 360px;
 }
+.form-group-fill {
+    width: 1000px;
+}
+.form-group-fill .control-value {
+    float: left;
+    width: 830px;
+}
 
