@@ -45,7 +45,10 @@
 .form-group .control-label {
     float: left;
     width: 100px;
+    height: 34px;
+    line-height: 34px;
     margin: 0 5px;
+    text-align: right;
 }
 .form-group .control-value {
     float: left;

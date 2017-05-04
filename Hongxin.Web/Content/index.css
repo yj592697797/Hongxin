@@ -19,6 +19,8 @@ body {
 
 .navbox {
     height: 40px;
+    width: 100%;
+    min-width: 1190px;
     position: relative;
     z-index: 9;
     margin: auto;
@@ -65,4 +67,14 @@ body {
 .partial-content {
     width: 1190px;
     margin: auto;
+}
+.fa-img i {
+    margin-right: 5px;
+}
+form .footer-btns {
+    float: right;
+    margin-right: 36px
+}
+form .footer-btns a {
+    margin-left: 16px;
 }

@@ -14,49 +14,49 @@
         <div class="form-group">
             <label for="" class="control-label">采购单编号</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="orderNo" class="form-control" value="HW-172A1">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">供应商</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="supplier" class="form-control" value="健祥">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="phone" class="form-control" value="18925482905">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">电话</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="tel" class="form-control" value="0769-2331416">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">传真</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="fax" class="form-control" value="0769-83362507">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">下单日期</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="date" name="orderData" class="form-control" value="2016-11-29">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">交货日期</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="date" name="deliveryDate" class="form-control" value="2016-12-26">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">备注</label>
             <div class="control-value">
-                <input type="text" class="form-control">
+                <input type="text" name="remark" class="form-control" value="延后交货">
             </div>
         </div>
         <div class="form-group form-group-fill">
@@ -71,27 +71,31 @@
                         <th width="60px">单位</th>
                         <th width="100px">数量</th>
                         <th>备注</th>
+                        <th width="42px">操作</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td><input type="text" value="强化清玻380*206*5" /></td>
-                        <td><input type="text" value="PCS" /></td>
-                        <td><input type="text" value="700" /></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用" /></td>
+                        <td><input type="text" value="强化清玻380*206*5" placeholder="请输入" /></td>
+                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
+                        <td><input type="text" value="700" placeholder="请输入"/></td>
+                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用" placeholder="请输入" /></td>
+                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td><input type="text" value="强化清玻386*118*5" /></td>
-                        <td><input type="text" value="PCS" /></td>
-                        <td><input type="text" value="600" /></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/W44CFD用" /></td>
+                        <td><input type="text" value="强化清玻386*118*5" placeholder="请输入" /></td>
+                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
+                        <td><input type="text" value="600" placeholder="请输入" /></td>
+                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/W44CFD用" placeholder="请输入" /></td>
+                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;"><i class="fa fa-plus-circle"></i></a></td>
+                        <td colspan="5"></td>
+                        <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;" title="添加"><i class="fa fa-plus-circle"></i></a></td>
                     </tr>
                 </tfoot>
             </table>
@@ -99,14 +103,24 @@
         <div class="form-group form-group-fill">
             <label for="" class="control-label">详细内容</label>
             <div class="control-value">
-                <textarea name="text" class="summernote" id="contents" title="Contents"></textarea>
+                <textarea name="contract" class="summernote" id="contents" title="Contents">合同内容</textarea>
             </div>
         </div>
         <div class="clear"></div>
+        <div class="footer-btns">
+            <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
+            <a href="javascript: void(0);" id="order-save" class="btn btn-success fa-img"><i class="fa fa-check-circle"></i>保存</a>
+            
+        </div>
+        
     </form>
 
     <script type="text/javascript">
         $(function () {
+            inits();
+            function inits() {
+                bindEvents();
+            }
             $('.summernote').summernote({
                 height: 200,
                 lang: 'zh-CN'
@@ -115,18 +129,91 @@
             $('form').on('submit', function (e) {
                 e.preventDefault();
                 alert($('.summernote').summernote('code'));
+                //$('.summernote').summernote('code', 'value');//赋值
                 alert($('.summernote').val());
             });
 
             function bindEvents() {
-                $('#add-detail').on('click', function () { addDetail();});
+                $('#add-detail').on('click', function () { addDetail(); });
+                $('#order-detail-table').on('click', '.del-detail', function () { delDetail($(this)); });
+                $('#order-save').on('click', function () { submitForm();});
             }
         });
 
         function addDetail() {
             var $tbody = $('#order-detail-table tbody');
-            var sortIndex = $table.find('tr').length + 1;
+            var sortIndex = $tbody.find('tr').length + 1;
             var trHtml = '';
+            trHtml = '<tr>' +
+                        '<td>' + sortIndex + '</td>' +
+                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
+                        '<td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;"><i class="fa fa-minus-circle"></i></a></td>' +
+                    '</tr>';
+            $tbody.append(trHtml);
+        }
+
+        function delDetail($this) {
+            var $delTr = $this.parent().parent();
+            $delTr.remove();
+            sortDetail();
+        }
+
+        function sortDetail() {
+            var $tbody = $('#order-detail-table tbody tr');
+            $.each($tbody, function (i, item) {
+                var sort = i + 1;
+                var $sortTr = $(item).children('td:first-child');
+                $sortTr.html(sort);
+            });
+        }
+
+        function submitForm() {
+            //订单主信息
+            var orderNo = $('input[name=orderNo]').val();
+            var supplier = $('input[name=supplier]').val();
+            var phone = $('input[name=phone]').val();
+            var tel = $('input[name=tel]').val();
+            var fax = $('input[name=fax]').val();
+            var orderData = $('input[name=orderData]').val();
+            var deliveryDate = $('input[name=deliveryDate]').val();
+            var remark = $('input[name=remark]').val();
+            var contract = $('.summernote').summernote('code');
+
+            var order = {
+                orderNo: orderNo,
+                supplier: supplier,
+                phone: phone,
+                tel: tel,
+                fax: fax,
+                orderData: orderData,
+                deliveryDate: deliveryDate,
+                remark: remark,
+                contract: contract,
+                details: []
+            };
+
+            //订单明细信息
+            var $details = $('#order-detail-table tbody tr');
+            $.each($details, function (i, item) {
+                var sortIndex = $(item).children('td:nth-child(1)').html();
+                var size = $(item).children('td:nth-child(2)').children('input').val();
+                var unit = $(item).children('td:nth-child(3)').children('input').val();
+                var count = $(item).children('td:nth-child(4)').children('input').val();
+                var remark = $(item).children('td:nth-child(5)').children('input').val();
+                var detail = {
+                    sortIndex: sortIndex,
+                    size: size,
+                    unit: unit,
+                    count: count,
+                    remark: remark
+                };
+                order.details.push(detail);
+            });
+
+            console.log('%o', order);
         }
     </script>
 </div>
