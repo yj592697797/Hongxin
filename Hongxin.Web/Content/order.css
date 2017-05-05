@@ -54,6 +54,11 @@
     float: left;
     width: 360px;
 }
+    .form-group .control-value .order-info {
+        height: 34px;
+        padding-top: 15px;
+        border-bottom: 1px solid #000;
+    }
 .form-group-fill {
     width: 1000px;
 }

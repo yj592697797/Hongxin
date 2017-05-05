@@ -38,6 +38,15 @@
     ];
 
     $(document).ready(function () {
+        inits();
+        function inits() {
+            bindEvents();
+        }
+        function bindEvents() {
+            $('#jqGrid').on('click', '.modify', function () { modify($(this)); });
+            $('#jqGrid').on('click', '.detail', function () { detail($(this)); });
+        }
+
         $('#jqGrid').jqGrid({
             data: mydata,
             datatype: 'local',
@@ -54,9 +63,9 @@
                     {
                         name: '', label: '操作', index: 'Operate', width: 100,
                         formatter: function (cellvalue, options, rowObject) {
-                            var modHtml = '<a href="javascript: void(0);" class="modify" title="修改">修改</a>';
-                            var delHtml = '<a href="javascript: void(0);" class="delete" title="删除">删除</a>';
-                            var detHtml = '<a href="javascript: void(0);" class="detail" title="详情">详情</a>';
+                            var modHtml = '<a href="javascript: void(0);" class="modify" title="修改" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">修改</a>';
+                            var delHtml = '<a href="javascript: void(0);" class="delete" title="删除" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">删除</a>';
+                            var detHtml = '<a href="javascript: void(0);" class="detail" title="详情" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">详情</a>';
                             var cellHtml = '<div class="order-operate">' + modHtml + delHtml + detHtml + '</div>';
                             return cellHtml;
                         }
@@ -93,6 +102,18 @@
                 console.log(textStatus)
             }
         })
+    }
+
+    function modify($this) {
+        window.location.href = '/Order/Edit?id=' + 1;
+    }
+    function detail($this) {
+        window.location.href = '/Order/ViewOrder?id=' + 1;
+    }
+    function del($this) {
+        var rowId = $this.data("rowid");
+        var id = $this.data("id");
+        $('#jqGrid').jqGrid('delRowData', rowId);
     }
 
 </script>

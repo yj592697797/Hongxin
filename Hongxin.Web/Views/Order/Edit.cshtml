@@ -2,61 +2,63 @@
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model Hongxin.Web.ViewModels.Order.EditViewModel
 <link href="~/Content/order.css" rel="stylesheet" />
 <link href="~/Content/summernote/summernote.css" rel="stylesheet" />
 <script src="~/Content/summernote/summernote.js"></script>
 <script src="~/Content/summernote/lang/summernote-zh-CN.min.js"></script>
 <div class="order-manager">
     <header>
-        <h1>添加采购单</h1>
+        <h1>修改采购单</h1>
     </header>
     <form class="form-horizontal order-add">
+        <input type="hidden" name="id" value="@Model.Id" />
         <div class="form-group">
             <label for="" class="control-label">采购单编号</label>
             <div class="control-value">
-                <input type="text" name="orderNo" class="form-control" value="HW-172A1">
+                <input type="text" name="orderNo" class="form-control" value="@Model.OrderNo">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">供应商</label>
             <div class="control-value">
-                <input type="text" name="supplier" class="form-control" value="健祥">
+                <input type="text" name="supplier" class="form-control" value="@Model.Supplier">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
-                <input type="text" name="phone" class="form-control" value="18925482905">
+                <input type="text" name="phone" class="form-control" value="@Model.Phone">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">电话</label>
             <div class="control-value">
-                <input type="text" name="tel" class="form-control" value="0769-2331416">
+                <input type="text" name="tel" class="form-control" value="@Model.Tel">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">传真</label>
             <div class="control-value">
-                <input type="text" name="fax" class="form-control" value="0769-83362507">
+                <input type="text" name="fax" class="form-control" value="@Model.Fax">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">下单日期</label>
             <div class="control-value">
-                <input type="date" name="orderData" class="form-control" value="2016-11-29">
+                <input type="date" name="orderData" class="form-control" value="@Model.OrderData">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">交货日期</label>
             <div class="control-value">
-                <input type="date" name="deliveryDate" class="form-control" value="2016-12-26">
+                <input type="date" name="deliveryDate" class="form-control" value="@Model.DeliveryDate">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">备注</label>
             <div class="control-value">
-                <input type="text" name="remark" class="form-control" value="延后交货">
+                <input type="text" name="remark" class="form-control" value="@Model.Remark">
             </div>
         </div>
         <div class="form-group form-group-fill">
@@ -75,22 +77,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" value="强化清玻380*206*5" placeholder="请输入" /></td>
-                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
-                        <td><input type="text" value="700" placeholder="请输入"/></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用" placeholder="请输入" /></td>
-                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="text" value="强化清玻386*118*5" placeholder="请输入" /></td>
-                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
-                        <td><input type="text" value="600" placeholder="请输入" /></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/W44CFD用" placeholder="请输入" /></td>
-                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
-                    </tr>
+                    @{
+                        foreach (var detail in Model.Details) 
+                        {
+                            <tr>
+                                <td>@detail.SortIndex</td>
+                                <td><input type="text" value="@detail.Size" placeholder="请输入" /></td>
+                                <td><input type="text" value="@detail.Unit" placeholder="请输入" /></td>
+                                <td><input type="text" value="@detail.Total" placeholder="请输入" /></td>
+                                <td><input type="text" value="@detail.Remark" placeholder="请输入" /></td>
+                                <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
+                            </tr>
+                        }
+                    }
                 </tbody>
                 <tfoot>
                     <tr>
@@ -103,16 +102,16 @@
         <div class="form-group form-group-fill">
             <label for="" class="control-label">详细内容</label>
             <div class="control-value">
-                <textarea name="contract" class="summernote" id="contents" title="Contents">合同内容</textarea>
+                <textarea name="contract" class="summernote" id="contents" title="Contents">@Model.Contract</textarea>
             </div>
         </div>
         <div class="clear"></div>
         <div class="footer-btns">
             <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
             <a href="javascript: void(0);" id="order-save" class="btn btn-success fa-img"><i class="fa fa-check-circle"></i>保存</a>
-            
+
         </div>
-        
+
     </form>
 
     <script type="text/javascript">
@@ -172,6 +171,7 @@
 
         function submitForm() {
             //订单主信息
+            var id = $('input[name=id]').val();
             var orderNo = $('input[name=orderNo]').val();
             var supplier = $('input[name=supplier]').val();
             var phone = $('input[name=phone]').val();
@@ -183,6 +183,7 @@
             var contract = $('.summernote').summernote('code');
 
             var order = {
+                Id: id,
                 OrderNo: orderNo,
                 Supplier: supplier,
                 Phone: phone,
@@ -214,7 +215,7 @@
             });
 
             console.log('%o', order);
-            var url = '/Order/AddPost';
+            var url = '/Order/EditPost';
             $.ajax({
                 url: url,
                 data: {

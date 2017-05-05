@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Hongxin.Web.ViewModels.Order.EditViewModel
+<link href="~/Content/order.css" rel="stylesheet" />
+<link href="~/Content/summernote/summernote.css" rel="stylesheet" />
+<script src="~/Content/summernote/summernote.js"></script>
+<script src="~/Content/summernote/lang/summernote-zh-CN.min.js"></script>
+<div class="order-manager">
+    <header>
+        <h1>查看采购单</h1>
+    </header>
+    <form class="form-horizontal order-add">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="form-group">
+            <label for="" class="control-label">采购单编号</label>
+            <div class="control-value">
+                <div class="order-info">@Model.OrderNo</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">供应商</label>
+            <div class="control-value">
+                <div class="order-info">@Model.Supplier</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">联系电话</label>
+            <div class="control-value">
+                <div class="order-info">@Model.Phone</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">电话</label>
+            <div class="control-value">
+                <div class="order-info">@Model.Tel</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">传真</label>
+            <div class="control-value">
+                <div class="order-info">@Model.Fax</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">下单日期</label>
+            <div class="control-value">
+                <div class="order-info">@Model.OrderData</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">交货日期</label>
+            <div class="control-value">
+                <div class="order-info">@Model.DeliveryDate</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="" class="control-label">备注</label>
+            <div class="control-value">
+                <div class="order-info">@Model.Remark</div>
+            </div>
+        </div>
+        <div class="form-group form-group-fill">
+            <header>
+                添加子项
+            </header>
+            <table id="order-detail-table" class="table table-detail table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th width="39px">序号</th>
+                        <th width="200px">品名规格</th>
+                        <th width="60px">单位</th>
+                        <th width="100px">数量</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (var detail in Model.Details)
+                        {
+                            <tr>
+                                <td>@detail.SortIndex</td>
+                                <td>@detail.Size</td>
+                                <td>@detail.Unit</td>
+                                <td>@detail.Total</td>
+                                <td>@detail.Remark</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group form-group-fill">
+            <label for="" class="control-label">详细内容</label>
+            <div class="control-value">
+                <textarea name="contract" class="summernote" id="contents" title="Contents">@Model.Contract</textarea>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="footer-btns">
+            <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
+        </div>
+
+    </form>
+
+    <script type="text/javascript">
+        $(function () {
+            inits();
+            function inits() {
+                bindEvents();
+            }
+            $('.summernote').summernote({
+                height: 200,
+                lang: 'zh-CN'
+            });
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+                alert($('.summernote').summernote('code'));
+                //$('.summernote').summernote('code', 'value');//赋值
+                alert($('.summernote').val());
+            });
+
+            function bindEvents() {
+            }
+        });
+
+    </script>
+</div>
+
