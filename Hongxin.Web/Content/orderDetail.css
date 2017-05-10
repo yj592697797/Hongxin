@@ -2,7 +2,8 @@
     color: white;
 }
 .detail-unfinished {
-    background-color: #ABABAB;
+    color: #000000;
+    background-color: #BFBFBF;
 }
 .detail-finished {
     background-color: #37ACCB;

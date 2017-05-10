@@ -2,7 +2,7 @@
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Hongxin.Web.ViewModels.Order.EditViewModel
+@model Hongxin.ViewModel.Order.EditViewModel
 <link href="~/Content/order.css" rel="stylesheet" />
 <link href="~/Content/summernote/summernote.css" rel="stylesheet" />
 <script src="~/Content/summernote/summernote.js"></script>
@@ -26,6 +26,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="" class="control-label">联系人</label>
+            <div class="control-value">
+                <div class="order-info">@Model.LinkPerson</div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
                 <div class="order-info">@Model.Phone</div>
@@ -46,7 +52,7 @@
         <div class="form-group">
             <label for="" class="control-label">下单日期</label>
             <div class="control-value">
-                <div class="order-info">@Model.OrderData</div>
+                <div class="order-info">@Model.OrderDate</div>
             </div>
         </div>
         <div class="form-group">
@@ -63,15 +69,17 @@
         </div>
         <div class="form-group form-group-fill">
             <header>
-                添加子项
+                子项
             </header>
             <table id="order-detail-table" class="table table-detail table-condensed table-bordered">
                 <thead>
                     <tr>
                         <th width="42px">序号</th>
-                        <th width="200px">品名规格</th>
+                        <th width="100px">品名</th>
+                        <th width="200px">规格</th>
                         <th width="60px">单位</th>
-                        <th width="100px">数量</th>
+                        <th width="60px">数量</th>
+                        <th width="60px">已出库</th>
                         <th>备注</th>
                     </tr>
                 </thead>
@@ -81,9 +89,11 @@
                         {
                             <tr>
                                 <td>@detail.SortIndex</td>
+                                <td>@detail.Name</td>
                                 <td>@detail.Size</td>
                                 <td>@detail.Unit</td>
                                 <td>@detail.Total</td>
+                                <td>@detail.Output</td>
                                 <td>@detail.Remark</td>
                             </tr>
                         }
@@ -99,7 +109,7 @@
         </div>
         <div class="clear"></div>
         <div class="footer-btns">
-            <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
+            <a href="/Order/Index" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
         </div>
 
     </form>
@@ -108,22 +118,11 @@
         $(function () {
             inits();
             function inits() {
-                bindEvents();
             }
             $('.summernote').summernote({
                 height: 200,
                 lang: 'zh-CN'
             });
-
-            $('form').on('submit', function (e) {
-                e.preventDefault();
-                alert($('.summernote').summernote('code'));
-                //$('.summernote').summernote('code', 'value');//赋值
-                alert($('.summernote').val());
-            });
-
-            function bindEvents() {
-            }
         });
 
     </script>

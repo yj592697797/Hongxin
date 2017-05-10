@@ -47,18 +47,20 @@
             $('#jqGrid').on('click', '.detail', function () { detail($(this)); });
             $('#jqGrid').on('click', '.delete', function () { del($(this)); });
         }
-
+        var url = '/Order/GetList';
         $('#jqGrid').jqGrid({
-            data: mydata,
-            datatype: 'local',
+            url: url,
+            datatype: 'json',
+            mtype: 'post',
             colModel: [
                     { name: 'Id', label: '序号', index: 'Id', hidden: true, key: true, width: 60 },
                     { name: 'OrderNo', label: '采购单编号', index: 'OrderNo', width: 90 },
                     { name: 'Supplier', label: '供应商', index: 'Supplier', width: 100 },
+                    { name: 'LinkPerson', label: '联系人', index: 'LinkPerson', width: 80 },
                     { name: 'Phone', label: '联系电话', index: 'Phone', width: 80 },
                     { name: 'Tel', label: '电话', index: 'Tel', width: 80 },
                     { name: 'Fax', label: '传真', index: 'Fax', width: 80 },
-                    { name: 'OrderData', label: '下单日期', index: 'OrderData', width: 80 },
+                    { name: 'OrderDate', label: '下单日期', index: 'OrderDate', width: 80 },
                     { name: 'DeliveryDate', label: '交货日期', index: 'DeliveryDate', width: 80 },
                     { name: 'CreateTime', label: '创建时间', index: 'CreateTime', width: 100 },
                     {
@@ -92,7 +94,9 @@
             url: '@Url.Action("Index", "OrderDetail")',
             type: 'GET', //GET
             async: true,    //或false,是否异步
-            data: {},
+            data: {
+                id: parentRowKey
+            },
             dataType: 'html',    //返回的数据格式：json/xml/html/script/jsonp/text
             success: function (data) {
                 $("#" + parentRowID).append(data);
@@ -119,19 +123,21 @@
         var rowId = $this.data("rowid");
         var id = $this.data("id");
         var url = '/Order/Delete';
-        if(confirm)
-        $.ajax({
-            url: url,
-            type: 'GET', //GET
-            async: true,    //或false,是否异步
-            data: {
-                id: id
-            },
-            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
-            success: function (data) {
-                $('#jqGrid').jqGrid('delRowData', rowId);
-            }
-        })
+        if (confirm("确认删除吗？")) {
+            $.ajax({
+                url: url,
+                type: 'GET', //GET
+                async: true,    //或false,是否异步
+                data: {
+                    id: id
+                },
+                dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+                success: function (data) {
+                    $('#jqGrid').jqGrid('delRowData', rowId);
+                }
+            });
+        }
+        
     }
 
 </script>

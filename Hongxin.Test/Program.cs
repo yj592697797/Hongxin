@@ -1,5 +1,4 @@
 ﻿using Hongxin.Model;
-using PetaPoco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +11,11 @@ namespace Hongxin.Test
     {
         static void Main(string[] args)
         {
-            string connectionString = "Data Source=" + @".\db\hongxin.db;";
-            var provider = "System.Data.SQLite";
-            var db = new Database(connectionString, provider);
-            var sql = "select * from [order]";
-            var orders = db.Query<OrderRecord>(sql);
+            //string connectionString = "Data Source=" + @".\db\hongxin.db;";
+            //var provider = "System.Data.SQLite";
+            //var db = new Database(connectionString, provider);
+            //var sql = "select * from [order]";
+            //var orders = db.Query<OrderRecord>(sql);
 
         }
     }

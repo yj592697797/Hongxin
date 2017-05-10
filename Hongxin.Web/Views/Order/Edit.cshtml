@@ -2,7 +2,7 @@
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Hongxin.Web.ViewModels.Order.EditViewModel
+@model Hongxin.ViewModel.Order.EditViewModel
 <link href="~/Content/order.css" rel="stylesheet" />
 <link href="~/Content/summernote/summernote.css" rel="stylesheet" />
 <script src="~/Content/summernote/summernote.js"></script>
@@ -26,6 +26,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="" class="control-label">联系人</label>
+            <div class="control-value">
+                <input type="text" name="linkPerson" class="form-control" value="@Model.LinkPerson">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
                 <input type="text" name="phone" class="form-control" value="@Model.Phone">
@@ -46,7 +52,7 @@
         <div class="form-group">
             <label for="" class="control-label">下单日期</label>
             <div class="control-value">
-                <input type="date" name="orderData" class="form-control" value="@Model.OrderData">
+                <input type="date" name="orderData" class="form-control" value="@Model.OrderDate">
             </div>
         </div>
         <div class="form-group">
@@ -69,9 +75,11 @@
                 <thead>
                     <tr>
                         <th width="42px">序号</th>
-                        <th width="200px">品名规格</th>
+                        <th width="100px">品名</th>
+                        <th width="200px">规格</th>
                         <th width="60px">单位</th>
-                        <th width="100px">数量</th>
+                        <th width="60px">数量</th>
+                        <th width="60px">已出库</th>
                         <th>备注</th>
                         <th width="42px">操作</th>
                     </tr>
@@ -81,10 +89,13 @@
                         foreach (var detail in Model.Details) 
                         {
                             <tr>
+                                <td style="display: none;">@detail.Id</td>
                                 <td>@detail.SortIndex</td>
+                                <td><input type="text" value="@detail.Name" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Size" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Unit" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Total" placeholder="请输入..." /></td>
+                                <td><input type="text" value="@detail.Output" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Remark" placeholder="请输入..." /></td>
                                 <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
                             </tr>
@@ -93,7 +104,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                         <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;" title="添加"><i class="fa fa-plus-circle"></i></a></td>
                     </tr>
                 </tfoot>
@@ -107,7 +118,7 @@
         </div>
         <div class="clear"></div>
         <div class="footer-btns">
-            <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
+            <a href="/Order/Index" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
             <a href="javascript: void(0);" id="order-save" class="btn btn-success fa-img"><i class="fa fa-check-circle"></i>保存</a>
 
         </div>
@@ -144,10 +155,13 @@
             var sortIndex = $tbody.find('tr').length + 1;
             var trHtml = '';
             trHtml = '<tr>' +
+                        '<td style="display: none;">-1</td>' +
                         '<td>' + sortIndex + '</td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="0" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;"><i class="fa fa-minus-circle"></i></a></td>' +
                     '</tr>';
@@ -164,7 +178,7 @@
             var $tbody = $('#order-detail-table tbody tr');
             $.each($tbody, function (i, item) {
                 var sort = i + 1;
-                var $sortTr = $(item).children('td:first-child');
+                var $sortTr = $(item).children('td:nth-child(2)');
                 $sortTr.html(sort);
             });
         }
@@ -174,10 +188,11 @@
             var id = $('input[name=id]').val();
             var orderNo = $('input[name=orderNo]').val();
             var supplier = $('input[name=supplier]').val();
+            var linkPerson = $('input[name=linkPerson]').val();
             var phone = $('input[name=phone]').val();
             var tel = $('input[name=tel]').val();
             var fax = $('input[name=fax]').val();
-            var orderData = $('input[name=orderData]').val();
+            var orderDate = $('input[name=orderData]').val();
             var deliveryDate = $('input[name=deliveryDate]').val();
             var remark = $('input[name=remark]').val();
             var contract = $('.summernote').summernote('code');
@@ -186,10 +201,11 @@
                 Id: id,
                 OrderNo: orderNo,
                 Supplier: supplier,
+                LinkPerson: linkPerson,
                 Phone: phone,
                 Tel: tel,
                 Fax: fax,
-                OrderData: orderData,
+                OrderDate: orderDate,
                 DeliveryDate: deliveryDate,
                 Remark: remark,
                 Contract: contract,
@@ -199,16 +215,22 @@
             //订单明细信息
             var $details = $('#order-detail-table tbody tr');
             $.each($details, function (i, item) {
-                var sortIndex = $(item).children('td:nth-child(1)').html();
-                var size = $(item).children('td:nth-child(2)').children('input').val();
-                var unit = $(item).children('td:nth-child(3)').children('input').val();
-                var total = $(item).children('td:nth-child(4)').children('input').val();
-                var remark = $(item).children('td:nth-child(5)').children('input').val();
+                var id = $(item).children('td:nth-child(1)').html();
+                var sortIndex = $(item).children('td:nth-child(2)').html();
+                var name = $(item).children('td:nth-child(3)').children('input').val();
+                var size = $(item).children('td:nth-child(4)').children('input').val();
+                var unit = $(item).children('td:nth-child(5)').children('input').val();
+                var total = $(item).children('td:nth-child(6)').children('input').val();
+                var output = $(item).children('td:nth-child(7)').children('input').val();
+                var remark = $(item).children('td:nth-child(8)').children('input').val();
                 var detail = {
+                    Id: id,
                     SortIndex: sortIndex,
+                    Name: name,
                     Size: size,
                     Unit: unit,
                     Total: total,
+                    OutPut: output,
                     Remark: remark
                 };
                 order.Details.push(detail);
@@ -224,7 +246,9 @@
                 type: "POST",
                 dataType: "json",
                 success: function (data) {
-
+                    if (data.State == 1) {
+                        window.location.href = '/Order/Index';
+                    }
                 }
             });
         }

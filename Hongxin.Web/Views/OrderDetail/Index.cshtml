@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
 }
+@model List<Hongxin.ViewModel.OrderDetail.IndexViewModel>
 <link href="~/Content/orderDetail.css" rel="stylesheet" />
 
 <div>
@@ -15,16 +16,53 @@
 <table class="table table-detail table-condensed table-bordered">
     <thead>
         <tr>
-            <th width="39px">序号</th>
-            <th width="200px">品名规格</th>
+            <th width="42px">序号</th>
+            <th width="100px">品名</th>
+            <th width="200px">规格</th>
             <th width="60px">单位</th>
             <th width="100px">数量</th>
-            <th width="100px">已交货</th>
+            <th width="100px">已出库</th>
             <th>备注</th>
         </tr>
     </thead>
     <tbody>
-        <tr class="detail-unfinished">
+        @{
+            if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="7" style="text-align: center; color: #000000;">无</td>
+                </tr>
+            }
+            foreach (var det in Model)
+            {
+                if (det.Output >= det.Total)
+                {
+                    <tr class="detail-finished">
+                        <td>@det.SortIndex</td>
+                        <td>@det.Name</td>
+                        <td>@det.Size</td>
+                        <td>@det.Unit</td>
+                        <td>@det.Total</td>
+                        <td>@det.Output</td>
+                        <td>@det.Remark</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="detail-unfinished">
+                        <td>@det.SortIndex</td>
+                        <td>@det.Name</td>
+                        <td>@det.Size</td>
+                        <td>@det.Unit</td>
+                        <td>@det.Total</td>
+                        <td>@det.Output</td>
+                        <td>@det.Remark</td>
+                    </tr>
+                }
+
+            }
+}
+        @*<tr class="detail-unfinished">
             <td>1</td>
             <td>强化清玻380*206*5</td>
             <td>PCS</td>
@@ -63,6 +101,6 @@
             <td>642</td>
             <td>640</td>
             <td>四边细磨斜边20留3MM(请附备品3片)/W58FP4DW用</td>
-        </tr>
+        </tr>*@
     </tbody>
 </table>

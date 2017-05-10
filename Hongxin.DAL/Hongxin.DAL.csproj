@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,8 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DBFactory.cs" />
+    <Compile Include="Database\PetaPoco.cs" />
+    <Compile Include="IDAL.cs" />
+    <Compile Include="Impls\DAL.cs" />
+    <Compile Include="Impls\OrderDetailDAL.cs" />
+    <Compile Include="Impls\OrderDAL.cs" />
+    <Compile Include="IOrderDetailDAL.cs" />
+    <Compile Include="IOrderDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hongxin.Core\Hongxin.Core.csproj">
+      <Project>{b8ca9bce-3220-4f08-8f9d-93816f09620f}</Project>
+      <Name>Hongxin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.Model\Hongxin.Model.csproj">
+      <Project>{2837d19f-2b36-4ac8-b059-b5d0d1816766}</Project>
+      <Name>Hongxin.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,6 +26,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="" class="control-label">联系人</label>
+            <div class="control-value">
+                @*<input type="text" name="linkPerson" class="form-control" value="陈小姐">*@
+                <input type="text" name="linkPerson" class="form-control" value="">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
                 @*<input type="text" name="phone" class="form-control" value="18925482905">*@
@@ -75,9 +82,11 @@
                 <thead>
                     <tr>
                         <th width="42px">序号</th>
-                        <th width="200px">品名规格</th>
+                        <th width="100px">品名</th>
+                        <th width="200px">规格</th>
                         <th width="60px">单位</th>
                         <th width="100px">数量</th>
+                        <th width="100px">已出库</th>
                         <th>备注</th>
                         <th width="42px">操作</th>
                     </tr>
@@ -87,7 +96,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5"></td>
+                        <td colspan="7"></td>
                         <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;" title="添加"><i class="fa fa-plus-circle"></i></a></td>
                     </tr>
                 </tfoot>
@@ -96,12 +105,12 @@
         <div class="form-group form-group-fill">
             <label for="" class="control-label">详细内容</label>
             <div class="control-value">
-                <textarea name="contract" class="summernote" id="contents" title="Contents">合同内容</textarea>
+                <textarea name="contract" class="summernote" id="contents" title="Contents"></textarea>
             </div>
         </div>
         <div class="clear"></div>
         <div class="footer-btns">
-            <a href="javascript: void(0);" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
+            <a href="/Order/Index" class="btn btn-default fa-img"><i class="fa fa fa-reply"></i>返回</a>
             <a href="javascript: void(0);" id="order-save" class="btn btn-success fa-img"><i class="fa fa-check-circle"></i>保存</a>
             
         </div>
@@ -143,6 +152,8 @@
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="0" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;"><i class="fa fa-minus-circle"></i></a></td>' +
                     '</tr>';
             $tbody.append(trHtml);
@@ -167,10 +178,11 @@
             //订单主信息
             var orderNo = $('input[name=orderNo]').val();
             var supplier = $('input[name=supplier]').val();
+            var linkPerson = $('input[name=linkPerson]').val();
             var phone = $('input[name=phone]').val();
             var tel = $('input[name=tel]').val();
             var fax = $('input[name=fax]').val();
-            var orderData = $('input[name=orderData]').val();
+            var orderDate = $('input[name=orderData]').val();
             var deliveryDate = $('input[name=deliveryDate]').val();
             var remark = $('input[name=remark]').val();
             var contract = $('.summernote').summernote('code');
@@ -178,10 +190,11 @@
             var order = {
                 OrderNo: orderNo,
                 Supplier: supplier,
+                LinkPerson: linkPerson,
                 Phone: phone,
                 Tel: tel,
                 Fax: fax,
-                OrderData: orderData,
+                OrderDate: orderDate,
                 DeliveryDate: deliveryDate,
                 Remark: remark,
                 Contract: contract,
@@ -192,15 +205,19 @@
             var $details = $('#order-detail-table tbody tr');
             $.each($details, function (i, item) {
                 var sortIndex = $(item).children('td:nth-child(1)').html();
-                var size = $(item).children('td:nth-child(2)').children('input').val();
-                var unit = $(item).children('td:nth-child(3)').children('input').val();
-                var total = $(item).children('td:nth-child(4)').children('input').val();
-                var remark = $(item).children('td:nth-child(5)').children('input').val();
+                var name = $(item).children('td:nth-child(2)').children('input').val();
+                var size = $(item).children('td:nth-child(3)').children('input').val();
+                var unit = $(item).children('td:nth-child(4)').children('input').val();
+                var total = $(item).children('td:nth-child(5)').children('input').val();
+                var output = $(item).children('td:nth-child(6)').children('input').val();
+                var remark = $(item).children('td:nth-child(7)').children('input').val();
                 var detail = {
                     SortIndex: sortIndex,
+                    Name: name,
                     Size: size,
                     Unit: unit,
                     Total: total,
+                    OutPut: output,
                     Remark: remark
                 };
                 order.Details.push(detail);
@@ -216,7 +233,9 @@
                 type: "POST",
                 dataType: "json",
                 success: function (data) {
-
+                    if (data.State == 1) {
+                        window.location.href = '/Order/Index';
+                    }
                 }
             });
         }

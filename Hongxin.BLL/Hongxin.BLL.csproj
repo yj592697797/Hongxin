@@ -39,8 +39,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Impls\OrderDetailBLL.cs" />
+    <Compile Include="Impls\OrderBLL.cs" />
+    <Compile Include="IOrderDetailBLL.cs" />
+    <Compile Include="IOrderBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hongxin.Core\Hongxin.Core.csproj">
+      <Project>{b8ca9bce-3220-4f08-8f9d-93816f09620f}</Project>
+      <Name>Hongxin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.DAL\Hongxin.DAL.csproj">
+      <Project>{69eb73ca-063d-4c56-b30f-de4b58791981}</Project>
+      <Name>Hongxin.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.Model\Hongxin.Model.csproj">
+      <Project>{2837d19f-2b36-4ac8-b059-b5d0d1816766}</Project>
+      <Name>Hongxin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.ViewModel\Hongxin.ViewModel.csproj">
+      <Project>{709c99dd-2bf6-4ec9-92d0-151c360996ff}</Project>
+      <Name>Hongxin.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

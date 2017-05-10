@@ -1,5 +1,4 @@
-﻿using PetaPoco;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Hongxin.Model
 {
-    [TableName("Order")]
     public class OrderRecord
     {
         public int Id { get; set; }
         public string OrderNo { get; set; }
         public string Supplier { get; set; }
+        public string LinkPerson { get; set; }
         public string Phone { get; set; }
         public string Tel { get; set; }
         public string Fax { get; set; }
@@ -22,6 +21,7 @@ namespace Hongxin.Model
         public DateTime CreateTime { get; set; }
         public DateTime ModifyTime { get; set; }
         public string Remark { get; set; }
+        public string Contract { get; set; }
 
         public override string ToString()
         {

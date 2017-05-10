@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Hongxin.BLL;
+using Hongxin.ViewModel.OrderDetail;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,10 +12,17 @@ namespace Hongxin.Web.Controllers
     {
         //
         // GET: /OrderDetail/
-
-        public ActionResult Index()
+        private IOrderDetailBLL _orderDetailBLL;
+        public OrderDetailController(IOrderDetailBLL orderDetailBLL)
         {
-            return View();
+            _orderDetailBLL = orderDetailBLL;
+        }
+
+        public ActionResult Index(int id)
+        {
+            var list = _orderDetailBLL.QueryByParent(id);
+            var views = new IndexViewModel().GetView(list.ToList());
+            return View(views);
         }
 
     }

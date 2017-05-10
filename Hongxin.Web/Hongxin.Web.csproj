@@ -40,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.1.0\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc4.3.1.0\lib\net40\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,6 +121,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutofacConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -120,16 +129,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResultInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\OrderDetail\AddForm.cs" />
-    <Compile Include="ViewModels\OrderDetail\BaseModel.cs" />
-    <Compile Include="ViewModels\OrderDetail\EditForm.cs" />
-    <Compile Include="ViewModels\OrderDetail\EditViewModel.cs" />
-    <Compile Include="ViewModels\Order\AddForm.cs" />
-    <Compile Include="ViewModels\Order\BaseModel.cs" />
-    <Compile Include="ViewModels\Order\EditForm.cs" />
-    <Compile Include="ViewModels\Order\EditViewModel.cs" />
-    <Compile Include="ViewModels\WebResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -194,6 +195,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hongxin.BLL\Hongxin.BLL.csproj">
+      <Project>{d92ffab1-6bd4-4694-a3fb-4df40e097292}</Project>
+      <Name>Hongxin.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hongxin.Core\Hongxin.Core.csproj">
       <Project>{b8ca9bce-3220-4f08-8f9d-93816f09620f}</Project>
       <Name>Hongxin.Core</Name>
@@ -201,6 +206,10 @@
     <ProjectReference Include="..\Hongxin.Model\Hongxin.Model.csproj">
       <Project>{2837d19f-2b36-4ac8-b059-b5d0d1816766}</Project>
       <Name>Hongxin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.ViewModel\Hongxin.ViewModel.csproj">
+      <Project>{709c99dd-2bf6-4ec9-92d0-151c360996ff}</Project>
+      <Name>Hongxin.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
