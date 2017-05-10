@@ -58,6 +58,7 @@
         height: 34px;
         padding-top: 15px;
         border-bottom: 1px solid #000;
+        text-align: center;
     }
 .form-group-fill {
     width: 1000px;

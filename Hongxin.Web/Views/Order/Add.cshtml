@@ -14,49 +14,57 @@
         <div class="form-group">
             <label for="" class="control-label">采购单编号</label>
             <div class="control-value">
-                <input type="text" name="orderNo" class="form-control" value="HW-172A1">
+                @*<input type="text" name="orderNo" class="form-control" value="HW-172A1">*@
+                <input type="text" name="orderNo" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">供应商</label>
             <div class="control-value">
-                <input type="text" name="supplier" class="form-control" value="健祥">
+                @*<input type="text" name="supplier" class="form-control" value="健祥">*@
+                <input type="text" name="supplier" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">联系电话</label>
             <div class="control-value">
-                <input type="text" name="phone" class="form-control" value="18925482905">
+                @*<input type="text" name="phone" class="form-control" value="18925482905">*@
+                <input type="text" name="phone" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">电话</label>
             <div class="control-value">
-                <input type="text" name="tel" class="form-control" value="0769-2331416">
+                @*<input type="text" name="tel" class="form-control" value="0769-2331416">*@
+                <input type="text" name="tel" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">传真</label>
             <div class="control-value">
-                <input type="text" name="fax" class="form-control" value="0769-83362507">
+                @*<input type="text" name="fax" class="form-control" value="0769-83362507">*@
+                <input type="text" name="fax" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">下单日期</label>
             <div class="control-value">
-                <input type="date" name="orderData" class="form-control" value="2016-11-29">
+                @*<input type="date" name="orderData" class="form-control" value="2016-11-29">*@
+                <input type="date" name="orderData" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">交货日期</label>
             <div class="control-value">
-                <input type="date" name="deliveryDate" class="form-control" value="2016-12-26">
+                @*<input type="date" name="deliveryDate" class="form-control" value="2016-12-26">*@
+                <input type="date" name="deliveryDate" class="form-control" value="">
             </div>
         </div>
         <div class="form-group">
             <label for="" class="control-label">备注</label>
             <div class="control-value">
-                <input type="text" name="remark" class="form-control" value="延后交货">
+                @*<input type="text" name="remark" class="form-control" value="延后交货">*@
+                <input type="text" name="remark" class="form-control" value="">
             </div>
         </div>
         <div class="form-group form-group-fill">
@@ -66,7 +74,7 @@
             <table id="order-detail-table" class="table table-detail table-condensed table-bordered">
                 <thead>
                     <tr>
-                        <th width="39px">序号</th>
+                        <th width="42px">序号</th>
                         <th width="200px">品名规格</th>
                         <th width="60px">单位</th>
                         <th width="100px">数量</th>
@@ -75,22 +83,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" value="强化清玻380*206*5" placeholder="请输入" /></td>
-                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
-                        <td><input type="text" value="700" placeholder="请输入"/></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用" placeholder="请输入" /></td>
-                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><input type="text" value="强化清玻386*118*5" placeholder="请输入" /></td>
-                        <td><input type="text" value="PCS" placeholder="请输入" /></td>
-                        <td><input type="text" value="600" placeholder="请输入" /></td>
-                        <td><input type="text" value="四边细磨斜边20留3MM(请附备品)/W44CFD用" placeholder="请输入" /></td>
-                        <td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;" title="删除"><i class="fa fa-minus-circle"></i></a></td>
-                    </tr>
+
                 </tbody>
                 <tfoot>
                     <tr>
@@ -146,10 +139,10 @@
             var trHtml = '';
             trHtml = '<tr>' +
                         '<td>' + sortIndex + '</td>' +
-                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
-                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
-                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
-                        '<td><input type="text" value="" placeholder="请输入" /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
+                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;"><i class="fa fa-minus-circle"></i></a></td>' +
                     '</tr>';
             $tbody.append(trHtml);

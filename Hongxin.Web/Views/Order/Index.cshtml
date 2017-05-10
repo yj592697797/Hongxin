@@ -12,7 +12,7 @@
         <h1>采购单管理</h1>
     </header>
     <div class="order-tools">
-        <div class="order-tool"><a href="@Url.Action("Add", "Order")"><i class="fa fa-plus-square"></i>添加采购单</a></div>
+        <div class="order-tool"><a href="@Url.Action("Add", "Order")" class="btn btn-primary fa-img"><i class="fa fa-plus-square"></i>添加采购单</a></div>
     </div>
     <div>
         <table id="jqGrid"></table>
@@ -45,6 +45,7 @@
         function bindEvents() {
             $('#jqGrid').on('click', '.modify', function () { modify($(this)); });
             $('#jqGrid').on('click', '.detail', function () { detail($(this)); });
+            $('#jqGrid').on('click', '.delete', function () { del($(this)); });
         }
 
         $('#jqGrid').jqGrid({
@@ -52,20 +53,20 @@
             datatype: 'local',
             colModel: [
                     { name: 'Id', label: '序号', index: 'Id', hidden: true, key: true, width: 60 },
-                    { name: 'OrderNo', label: '采购单编号', index: 'OrderNo', width: 90},
+                    { name: 'OrderNo', label: '采购单编号', index: 'OrderNo', width: 90 },
                     { name: 'Supplier', label: '供应商', index: 'Supplier', width: 100 },
                     { name: 'Phone', label: '联系电话', index: 'Phone', width: 80 },
-                    { name: 'Tel', label: '电话', index: 'Tel', width: 80},
+                    { name: 'Tel', label: '电话', index: 'Tel', width: 80 },
                     { name: 'Fax', label: '传真', index: 'Fax', width: 80 },
-                    { name: 'OrderData', label: '下单日期', index: 'OrderData', width: 80},
-                    { name: 'DeliveryDate', label: '交货日期', index: 'DeliveryDate', width: 80},
+                    { name: 'OrderData', label: '下单日期', index: 'OrderData', width: 80 },
+                    { name: 'DeliveryDate', label: '交货日期', index: 'DeliveryDate', width: 80 },
                     { name: 'CreateTime', label: '创建时间', index: 'CreateTime', width: 100 },
                     {
                         name: '', label: '操作', index: 'Operate', width: 100,
                         formatter: function (cellvalue, options, rowObject) {
-                            var modHtml = '<a href="javascript: void(0);" class="modify" title="修改" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">修改</a>';
-                            var delHtml = '<a href="javascript: void(0);" class="delete" title="删除" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">删除</a>';
-                            var detHtml = '<a href="javascript: void(0);" class="detail" title="详情" data-rowid="' + options.rowId + '" data-id="' + rowObject.Isd + '">详情</a>';
+                            var modHtml = '<a href="javascript: void(0);" class="modify" title="修改" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">修改</a>';
+                            var delHtml = '<a href="javascript: void(0);" class="delete" title="删除" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">删除</a>';
+                            var detHtml = '<a href="javascript: void(0);" class="detail" title="详情" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">详情</a>';
                             var cellHtml = '<div class="order-operate">' + modHtml + delHtml + detHtml + '</div>';
                             return cellHtml;
                         }
@@ -105,15 +106,32 @@
     }
 
     function modify($this) {
-        window.location.href = '/Order/Edit?id=' + 1;
+        var rowId = $this.data("rowid");
+        var id = $this.data("id");
+        window.location.href = '/Order/Edit?id=' + id;
     }
     function detail($this) {
-        window.location.href = '/Order/ViewOrder?id=' + 1;
+        var rowId = $this.data("rowid");
+        var id = $this.data("id");
+        window.location.href = '/Order/ViewOrder?id=' + id;
     }
     function del($this) {
         var rowId = $this.data("rowid");
         var id = $this.data("id");
-        $('#jqGrid').jqGrid('delRowData', rowId);
+        var url = '/Order/Delete';
+        if(confirm)
+        $.ajax({
+            url: url,
+            type: 'GET', //GET
+            async: true,    //或false,是否异步
+            data: {
+                id: id
+            },
+            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                $('#jqGrid').jqGrid('delRowData', rowId);
+            }
+        })
     }
 
 </script>

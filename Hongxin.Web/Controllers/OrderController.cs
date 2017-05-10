@@ -28,7 +28,7 @@ namespace Hongxin.Web.Controllers
         public ActionResult AddPost(string orderstr)
         {
             AddForm form = JsonConvert.DeserializeObject<AddForm>(orderstr);
-            return Json(new WebResponse { State = 1 });
+            return Json(new WebResponse { State = 1 }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Edit(int id)
@@ -127,6 +127,11 @@ namespace Hongxin.Web.Controllers
             };
 
             return View(model);
+        }
+
+        public JsonResult Delete(int id) 
+        {
+            return Json(new WebResponse { State = 1}, JsonRequestBehavior.AllowGet);
         }
 
 

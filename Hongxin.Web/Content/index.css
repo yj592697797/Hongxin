@@ -11,9 +11,10 @@ img {
     clear: both;
 }
 body {
-    font-size: 12px;
+    font-size: 14px;
     color: #555555;
     margin: auto;
+    font-family: 'SimSun';
     /*background: url(../img/bg.jpg) no-repeat center top;*/
 }
 
