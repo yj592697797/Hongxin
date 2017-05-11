@@ -6,22 +6,21 @@
 
 <div>
     <span style="float: left;">采购单明细：</span>
-    <div style="float: left;">
+    @*<div style="float: left;">
         <div class="detail-unfinished" style="width: 50px; height: 20px;"></div>未完成
     </div>
     <div style="float: left;margin-left: 20px;">
         <div class="detail-finished" style="width: 50px; height: 20px;"></div>已完成
-    </div>
+    </div>*@
 </div>
 <table class="table table-detail table-condensed table-bordered">
     <thead>
         <tr>
             <th width="42px">序号</th>
-            <th width="100px">品名</th>
+            <th width="150px">品名</th>
             <th width="200px">规格</th>
             <th width="60px">单位</th>
             <th width="100px">数量</th>
-            <th width="100px">已出库</th>
             <th>备注</th>
         </tr>
     </thead>
@@ -35,7 +34,7 @@
             }
             foreach (var det in Model)
             {
-                if (det.Output >= det.Total)
+                @*if (det.Output >= det.Total)
                 {
                     <tr class="detail-finished">
                         <td>@det.SortIndex</td>
@@ -43,22 +42,20 @@
                         <td>@det.Size</td>
                         <td>@det.Unit</td>
                         <td>@det.Total</td>
-                        <td>@det.Output</td>
                         <td>@det.Remark</td>
                     </tr>
                 }
                 else
-                {
+                {*@
                     <tr class="detail-unfinished">
                         <td>@det.SortIndex</td>
                         <td>@det.Name</td>
                         <td>@det.Size</td>
                         <td>@det.Unit</td>
                         <td>@det.Total</td>
-                        <td>@det.Output</td>
                         <td>@det.Remark</td>
                     </tr>
-                }
+                //}
 
             }
 }

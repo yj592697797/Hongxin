@@ -1,4 +1,5 @@
-﻿using Hongxin.DAL;
+﻿using Hongxin.BLL.Template;
+using Hongxin.DAL;
 using Hongxin.Model;
 using System;
 using System.Collections.Generic;
@@ -49,6 +50,7 @@ namespace Hongxin.BLL.Impls
                 Finished = 0,
                 CreateTime = DateTime.Now,
                 ModifyTime = DateTime.Now,
+                Address = form.Address,
                 Remark = form.Remark,
                 Contract = form.Contract
             };
@@ -94,7 +96,7 @@ namespace Hongxin.BLL.Impls
             var fdetails = new List<OrderDetailRecord>();
 
             var model = _thisDAL.Query(form.Id);
-            var details = _orderDetailDal.Query();
+            var details = _orderDetailDal.QueryByParent(form.Id);
 
             model.OrderNo = form.OrderNo;
             model.Supplier = form.Supplier;
@@ -104,6 +106,7 @@ namespace Hongxin.BLL.Impls
             model.Fax = form.Fax;
             model.DeliveryDate = deliveryDate;
             model.ModifyTime = DateTime.Now;
+            model.Address = form.Address;
             model.Remark = form.Remark;
             model.Contract = form.Contract;
 
@@ -163,6 +166,13 @@ namespace Hongxin.BLL.Impls
                 _thisDAL.AbortTransaction();
                 throw e;
             }
+        }
+
+        public void Import(int id)
+        {
+            var order = _thisDAL.Query(id);
+            var details = _orderDetailDal.QueryByParent(id).ToList();
+            string fileName = OrderTemplate.Create(order, details);
         }
     }
 }

@@ -46,6 +46,7 @@
             $('#jqGrid').on('click', '.modify', function () { modify($(this)); });
             $('#jqGrid').on('click', '.detail', function () { detail($(this)); });
             $('#jqGrid').on('click', '.delete', function () { del($(this)); });
+            $('#jqGrid').on('click', '.import', function () { import_($(this)); });
         }
         var url = '/Order/GetList';
         $('#jqGrid').jqGrid({
@@ -62,14 +63,15 @@
                     { name: 'Fax', label: '传真', index: 'Fax', width: 80 },
                     { name: 'OrderDate', label: '下单日期', index: 'OrderDate', width: 80 },
                     { name: 'DeliveryDate', label: '交货日期', index: 'DeliveryDate', width: 80 },
-                    { name: 'CreateTime', label: '创建时间', index: 'CreateTime', width: 100 },
+                    { name: 'CreateTime', label: '创建时间', index: 'CreateTime', width: 80 },
                     {
-                        name: '', label: '操作', index: 'Operate', width: 100,
+                        name: '', label: '操作', index: 'Operate', width: 125,
                         formatter: function (cellvalue, options, rowObject) {
                             var modHtml = '<a href="javascript: void(0);" class="modify" title="修改" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">修改</a>';
                             var delHtml = '<a href="javascript: void(0);" class="delete" title="删除" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">删除</a>';
                             var detHtml = '<a href="javascript: void(0);" class="detail" title="详情" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">详情</a>';
-                            var cellHtml = '<div class="order-operate">' + modHtml + delHtml + detHtml + '</div>';
+                            var importHtml = '<a href="javascript: void(0);" class="import" title="导出" data-rowid="' + options.rowId + '" data-id="' + rowObject.Id + '">导出</a>';
+                            var cellHtml = '<div class="order-operate">' + modHtml + detHtml + importHtml + delHtml + '</div>';
                             return cellHtml;
                         }
                     }
@@ -77,7 +79,7 @@
             loadonce: true,
             width: 1190,
             height: 600,
-            rowNum: 20,
+            rowNum: 15,
             subGrid: true, // set the subGrid property to true to show expand buttons for each row
             subGridRowExpanded: showChildGrid, // javascript function that will take care of showing the child grid
             pager: '#jqGridPager'
@@ -119,6 +121,23 @@
         var id = $this.data("id");
         window.location.href = '/Order/ViewOrder?id=' + id;
     }
+    function import_($this) {
+        var rowId = $this.data("rowid");
+        var id = $this.data("id");
+        var url = '/Order/Import';
+        $.ajax({
+            url: url,
+            type: 'GET', //GET
+            async: true,    //或false,是否异步
+            data: {
+                id: id
+            },
+            dataType: 'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+            success: function (data) {
+                alert("success!");
+            }
+        });
+    }
     function del($this) {
         var rowId = $this.data("rowid");
         var id = $this.data("id");
@@ -137,7 +156,6 @@
                 }
             });
         }
-        
     }
 
 </script>

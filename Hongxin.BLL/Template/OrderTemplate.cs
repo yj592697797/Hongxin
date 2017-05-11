@@ -6,124 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hongxin.Test
+namespace Hongxin.BLL.Template
 {
-    class Program
+    public class OrderTemplate
     {
-        static void Main(string[] args)
+        public static string Create(OrderRecord order, List<OrderDetailRecord> details)
         {
-            var order = new OrderRecord 
-            {
-                OrderNo = "HW-172A1",
-                Supplier = "健翔",
-                LinkPerson = "李",
-                Phone = "18925482905",
-                Tel = "0769-2331416",
-                Fax = "0769-83362507",
-                OrderDate = DateTime.Now,
-                DeliveryDate = DateTime.Now
-            };
-            var details = new List<OrderDetailRecord> 
-            {
-                new OrderDetailRecord
-                {
-                    SortIndex = 1,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 2,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 3,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 4,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 5,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 6,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 7,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 8,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 9,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                },
-                new OrderDetailRecord
-                {
-                    SortIndex = 10,
-                    Name = "强化清玻",
-                    Size = "380*206*5",
-                    Unit = "PCS",
-                    Total = 700,
-                    Remark = "四边细磨斜边20留3MM(请附备品)/WQ52C4DRTB用"
-                }
-            };
-            string appPath = AppDomain.CurrentDomain.BaseDirectory;
+            string appPath = AppDomain.CurrentDomain.BaseDirectory + "Temp/";
             string sheetName = "采购单";
-            string fileName = appPath + "采购单.xlsx";
+            string fileName = appPath + DateTime.Now.ToString("yyyyMMddHHmmss_")  + "采购单.xlsx";
+
+            order.Contract = order.Contract.Replace("<p>", "").Replace("</p>", "\n").Replace("<br>", "\n");
 
             ExcelHelper excel = new ExcelHelper();
             try
             {
-                
+
                 excel.Create();
                 var sheet = excel.AddSheet(sheetName);
                 excel.UniteCells(sheet, 6, 1, 6, 2);
@@ -180,7 +78,7 @@ namespace Hongxin.Test
                 excel.SetCellValue(sheet, row, 9, "单位");
                 excel.SetCellValue(sheet, row, 10, "数量");
                 excel.SetCellValue(sheet, row, 12, "备注");
-                foreach(var det in details)
+                foreach (var det in details)
                 {
                     row++;
                     excel.UniteCells(sheet, row, 3, row, 5);
@@ -199,7 +97,8 @@ namespace Hongxin.Test
                 int contract = 7;
                 excel.UniteCells(sheet, row, 2, row + contract, 16);
                 excel.SetCellProperty(sheet, row, 2, row + contract, 16, 12, "宋体", false, Microsoft.Office.Interop.Excel.Constants.xlTop, Microsoft.Office.Interop.Excel.Constants.xlLeft, 22);
-                excel.SetCellValue(sheet, row, 2, "我测试换行符\n换行了");
+                excel.SetCellProperty_WrapText(sheet, row, 2, row + contract, 16, true);
+                excel.SetCellValue(sheet, row, 2, order.Contract);
 
                 row = row + contract + 2;
                 excel.UniteCells(sheet, row, 2, row, 3);
@@ -215,26 +114,18 @@ namespace Hongxin.Test
                 excel.SetCellProperty_Border_Bottom(sheet, row, 9, row, 10);
                 excel.SetCellProperty(sheet, row, 9, row, 10, 12, "宋体", false, Microsoft.Office.Interop.Excel.Constants.xlCenter, Microsoft.Office.Interop.Excel.Constants.xlLeft, 22);
 
-
                 excel.SaveAs(fileName);
             }
             catch (Exception e)
             {
-
+                throw e;
             }
-            finally 
+            finally
             {
                 excel.Close();
             }
-            
-        }
-    }
 
-    public class ExcelCellProperty 
-    {
-        public string Name { get; set; }
-        public string DBName { get; set; }
-        public int[] TitleCell { get; set; }
-        public int[] ValueCell { get; set; }
+            return fileName;
+        }
     }
 }

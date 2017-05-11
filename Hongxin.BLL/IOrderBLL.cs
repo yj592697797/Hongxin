@@ -16,5 +16,6 @@ namespace Hongxin.BLL
         void Add(AddForm form);
         void Edit(EditForm form);
         void Delete(int id);
+        void Import(int id);
     }
 }

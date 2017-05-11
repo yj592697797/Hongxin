@@ -15,6 +15,7 @@ namespace Hongxin.ViewModel.Order
         public string Fax { get; set; }
         public string OrderDate { get; set; }
         public string DeliveryDate { get; set; }
+        public string Address { get; set; }
         public string Remark { get; set; }
         public string Contract { get; set; }
     }

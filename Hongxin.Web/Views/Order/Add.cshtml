@@ -68,6 +68,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="" class="control-label">地址</label>
+            <div class="control-value">
+                @*<input type="text" name="remark" class="form-control" value="延后交货">*@
+                <input type="text" name="address" class="form-control" value="">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="" class="control-label">备注</label>
             <div class="control-value">
                 @*<input type="text" name="remark" class="form-control" value="延后交货">*@
@@ -86,7 +93,6 @@
                         <th width="200px">规格</th>
                         <th width="60px">单位</th>
                         <th width="100px">数量</th>
-                        <th width="100px">已出库</th>
                         <th>备注</th>
                         <th width="42px">操作</th>
                     </tr>
@@ -96,7 +102,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="7"></td>
+                        <td colspan="6"></td>
                         <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;" title="添加"><i class="fa fa-plus-circle"></i></a></td>
                     </tr>
                 </tfoot>
@@ -152,7 +158,6 @@
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
-                        '<td><input type="text" value="0" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><a href="javascript: void(0);" class="del-detail" style="font-size: 16px;display: block;margin-left: 8px;color: red;"><i class="fa fa-minus-circle"></i></a></td>' +
                     '</tr>';
@@ -184,6 +189,7 @@
             var fax = $('input[name=fax]').val();
             var orderDate = $('input[name=orderData]').val();
             var deliveryDate = $('input[name=deliveryDate]').val();
+            var address = $('input[name=address]').val();
             var remark = $('input[name=remark]').val();
             var contract = $('.summernote').summernote('code');
 
@@ -196,6 +202,7 @@
                 Fax: fax,
                 OrderDate: orderDate,
                 DeliveryDate: deliveryDate,
+                Address: address,
                 Remark: remark,
                 Contract: contract,
                 Details: []
@@ -209,8 +216,8 @@
                 var size = $(item).children('td:nth-child(3)').children('input').val();
                 var unit = $(item).children('td:nth-child(4)').children('input').val();
                 var total = $(item).children('td:nth-child(5)').children('input').val();
-                var output = $(item).children('td:nth-child(6)').children('input').val();
-                var remark = $(item).children('td:nth-child(7)').children('input').val();
+                var output = 0;
+                var remark = $(item).children('td:nth-child(6)').children('input').val();
                 var detail = {
                     SortIndex: sortIndex,
                     Name: name,

@@ -207,6 +207,22 @@ namespace Hongxin.Web.Controllers
             return Json(ri, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult Import(int id) 
+        {
+            var ri = new ResultInfo { State = 1 };
+            try
+            {
+                _thisBLL.Import(id);
+            }
+            catch (Exception e)
+            {
+                ri.State = 0;
+                ri.Msg = e.Message;
+            }
+
+            return Json(ri, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }

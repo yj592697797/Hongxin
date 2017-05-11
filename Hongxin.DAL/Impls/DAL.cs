@@ -73,6 +73,7 @@ namespace Hongxin.DAL.Impls
         {
             string sql = string.Format("select * from {0}", TableName);
             var page = DataBase.Page<T>(jp.page, jp.rows, sql);
+            jp.records = Convert.ToInt32(page.TotalItems);
             return page.Items;
         }
     }
