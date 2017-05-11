@@ -81,8 +81,7 @@
                 <thead>
                     <tr>
                         <th width="42px">序号</th>
-                        <th width="100px">品名</th>
-                        <th width="200px">规格</th>
+                        <th width="300px">品名规格</th>
                         <th width="60px">单位</th>
                         <th width="60px">数量</th>
                         <th>备注</th>
@@ -97,7 +96,6 @@
                                 <td style="display: none;">@detail.Id</td>
                                 <td>@detail.SortIndex</td>
                                 <td><input type="text" value="@detail.Name" placeholder="请输入..." /></td>
-                                <td><input type="text" value="@detail.Size" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Unit" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Total" placeholder="请输入..." /></td>
                                 <td><input type="text" value="@detail.Remark" placeholder="请输入..." /></td>
@@ -108,7 +106,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="6"></td>
+                        <td colspan="5"></td>
                         <td><a href="javascript: void(0);" id="add-detail" style="font-size: 16px;display: block;margin-left: 8px;" title="添加"><i class="fa fa-plus-circle"></i></a></td>
                     </tr>
                 </tfoot>
@@ -161,7 +159,6 @@
             trHtml = '<tr>' +
                         '<td style="display: none;">-1</td>' +
                         '<td>' + sortIndex + '</td>' +
-                        '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
                         '<td><input type="text" value="" placeholder="请输入..." /></td>' +
@@ -222,17 +219,15 @@
             $.each($details, function (i, item) {
                 var id = $(item).children('td:nth-child(1)').html();
                 var sortIndex = $(item).children('td:nth-child(2)').html();
-                var name = $(item).children('td:nth-child(3)').children('input').val();
-                var size = $(item).children('td:nth-child(4)').children('input').val();
-                var unit = $(item).children('td:nth-child(5)').children('input').val();
-                var total = $(item).children('td:nth-child(6)').children('input').val();
+                var name_size = $(item).children('td:nth-child(3)').children('input').val();
+                var unit = $(item).children('td:nth-child(4)').children('input').val();
+                var total = $(item).children('td:nth-child(5)').children('input').val();
                 var output = 0;
-                var remark = $(item).children('td:nth-child(8)').children('input').val();
+                var remark = $(item).children('td:nth-child(6)').children('input').val();
                 var detail = {
                     Id: id,
                     SortIndex: sortIndex,
-                    Name: name,
-                    Size: size,
+                    Name: name_size,
                     Unit: unit,
                     Total: total,
                     OutPut: output,

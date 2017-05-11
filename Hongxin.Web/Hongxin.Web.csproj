@@ -196,24 +196,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hongxin.BLL\Hongxin.BLL.csproj">
-      <Project>{d92ffab1-6bd4-4694-a3fb-4df40e097292}</Project>
-      <Name>Hongxin.BLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hongxin.Core\Hongxin.Core.csproj">
-      <Project>{b8ca9bce-3220-4f08-8f9d-93816f09620f}</Project>
-      <Name>Hongxin.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hongxin.Model\Hongxin.Model.csproj">
-      <Project>{2837d19f-2b36-4ac8-b059-b5d0d1816766}</Project>
-      <Name>Hongxin.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hongxin.ViewModel\Hongxin.ViewModel.csproj">
-      <Project>{709c99dd-2bf6-4ec9-92d0-151c360996ff}</Project>
-      <Name>Hongxin.ViewModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="db\hongxin.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -268,6 +250,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resource\采购单_模板.xlsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hongxin.BLL\Hongxin.BLL.csproj">
+      <Project>{d92ffab1-6bd4-4694-a3fb-4df40e097292}</Project>
+      <Name>Hongxin.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.Core\Hongxin.Core.csproj">
+      <Project>{b8ca9bce-3220-4f08-8f9d-93816f09620f}</Project>
+      <Name>Hongxin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.Model\Hongxin.Model.csproj">
+      <Project>{2837d19f-2b36-4ac8-b059-b5d0d1816766}</Project>
+      <Name>Hongxin.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hongxin.ViewModel\Hongxin.ViewModel.csproj">
+      <Project>{709c99dd-2bf6-4ec9-92d0-151c360996ff}</Project>
+      <Name>Hongxin.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

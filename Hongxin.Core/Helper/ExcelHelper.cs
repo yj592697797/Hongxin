@@ -92,8 +92,7 @@ namespace Hongxin.Core.Helper
             string name = "宋体", 
             bool isBold = false,
             Microsoft.Office.Interop.Excel.Constants VerticalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter,
-            Microsoft.Office.Interop.Excel.Constants HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight,
-            int rowHeight = 22
+            Microsoft.Office.Interop.Excel.Constants HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlRight
             )
         //设置一个单元格的属性   字体，   大小，颜色   ，对齐方式
         {
@@ -106,7 +105,6 @@ namespace Hongxin.Core.Helper
             ws.Range[ws.Cells[Startx, Starty], ws.Cells[Endx, Endy]].Font.Bold = isBold;
             ws.Range[ws.Cells[Startx, Starty], ws.Cells[Endx, Endy]].VerticalAlignment = VerticalAlignment;
             ws.Range[ws.Cells[Startx, Starty], ws.Cells[Endx, Endy]].HorizontalAlignment = HorizontalAlignment;
-            if (rowHeight != 0) ws.Range[ws.Cells[Startx, Starty], ws.Cells[Endx, Endy]].RowHeight = rowHeight;
         }
 
         public void SetCellProperty_RowHeight(Microsoft.Office.Interop.Excel.Worksheet ws, int x1, int y1, int x2, int y2, int rowHeight) 
